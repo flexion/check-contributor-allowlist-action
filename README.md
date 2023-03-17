@@ -6,7 +6,7 @@ This action checks PR contributors against a configurable allowlist.
 
 ### `allowlist-path`
 
-**Required** The path to the contributor allowlist. Default `"/doc/team.md"`.
+**Required** The path to the contributor allowlist. Default `"/doc/team.md"`. Please follow the format in [doc/team.md](doc/team.md)
 
 ## Outputs
 
