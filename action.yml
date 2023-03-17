@@ -6,9 +6,13 @@ inputs:
     required: true
     default: 'doc/team.md'
   filter_out_pattern:
+    description: 'RegExp filter pattern'
     required: true
+    default: ""
   filter_out_flags:
+    description: 'RegExp filter flags'
     required: true
+    default: ""
   token:
     required: true
 runs:
