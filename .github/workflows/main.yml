@@ -1,9 +1,9 @@
-on: [push]
+on: [pull_request]
 
 jobs:
-  hello_world_job:
+  test_action:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: A job to to test action
     steps:
       # To use this repository's private action,
       # you must check out the repository
@@ -13,4 +13,5 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: check-contributor-allowlist-action
         with:
-          allowlist-path: 'my-path-to-allowlist'
+          # allowlist-path: 'my-path-to-allowlist'
+          token: ${{ secrets.GITHUB_TOKEN }}
