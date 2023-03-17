@@ -9712,19 +9712,24 @@ try {
     const filterOutFlags = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('filter_out_flags')
     const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(token)
   
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug(`owner: ${repo.owner.login}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug(`repo: ${repo.name}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug(`pull_number: ${pr.number}`);
     let { data: commits } = await octokit.rest.pulls.listCommits({
       owner: repo.owner.login,
       repo: repo.name,
       pull_number: pr.number,
-    })
+    });
     
     if (filterOutPattern) {
       const regex = new RegExp(filterOutPattern, filterOutFlags)
-      commits = commits.filter(({author}) => {
+      commits = commits.filter(({ author }) => {
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug(`commits.author`, author);
         return !regex.test(author.login)
       })
     }
 
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug(`commits: ${JSON.stringify(commits, null, 2)}`);
     let commit_authors = commits.map((commit) => commit.author.login).reduce(
       (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
       [],

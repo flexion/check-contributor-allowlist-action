@@ -20,19 +20,24 @@ try {
     const filterOutFlags = core.getInput('filter_out_flags')
     const octokit = github.getOctokit(token)
   
+    core.debug(`owner: ${repo.owner.login}`);
+    core.debug(`repo: ${repo.name}`);
+    core.debug(`pull_number: ${pr.number}`);
     let { data: commits } = await octokit.rest.pulls.listCommits({
       owner: repo.owner.login,
       repo: repo.name,
       pull_number: pr.number,
-    })
+    });
     
     if (filterOutPattern) {
       const regex = new RegExp(filterOutPattern, filterOutFlags)
-      commits = commits.filter(({author}) => {
+      commits = commits.filter(({ author }) => {
+        core.debug(`commits.author`, author);
         return !regex.test(author.login)
       })
     }
 
+    core.debug(`commits: ${JSON.stringify(commits, null, 2)}`);
     let commit_authors = commits.map((commit) => commit.author.login).reduce(
       (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
       [],
