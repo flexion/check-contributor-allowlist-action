@@ -4,7 +4,13 @@ inputs:
   allowlist-path:
     description: 'Path to allowlist'
     required: true
-    default: '/doc/team.md'
+    default: 'doc/team.md'
+  filter_out_pattern:
+    required: true
+  filter_out_flags:
+    required: true
+  token:
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

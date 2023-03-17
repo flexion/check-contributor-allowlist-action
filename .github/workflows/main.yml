@@ -1,0 +1,17 @@
+on: [pull_request]
+
+jobs:
+  test_action:
+    runs-on: ubuntu-latest
+    name: A job to to test action
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: check-contributor-allowlist-action
+        uses: ./ # Uses an action in the root directory
+        id: check-contributor-allowlist-action
+        with:
+          # allowlist-path: 'my-path-to-allowlist'
+          token: ${{ secrets.GITHUB_TOKEN }}
