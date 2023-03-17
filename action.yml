@@ -1,0 +1,10 @@
+name: 'check-contributor-allowlist'
+description: 'Check PR contributors against allowlist.'
+inputs:
+  allowlist-path:
+    description: 'Path to allowlist'
+    required: true
+    default: '/doc/team.md'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
